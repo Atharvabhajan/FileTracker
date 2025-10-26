@@ -64,11 +64,52 @@ g++ -std=c++17 -pthread -o FileTracker main.cpp FileWatcher.cpp DirectorySnapsho
 ---
 
 ## Usage
-  Run interactively
+
+### Basic Usage
+```bash
+# Run interactively
 ./FileTracker
 
-Run directly with a directory
+# Run directly with a directory
 ./FileTracker start "C:\Users\HP\Documents\admission_doc"
+```
+
+### Global Installation (Command Line Access from Anywhere)
+
+#### Windows
+1. Copy the `FileTracker.exe` to a permanent location (e.g., `C:\Program Files\FileTracker\`)
+2. Add to PATH:
+   - Open Start Menu and search for "Environment Variables"
+   - Click "Edit the system environment variables"
+   - Click "Environment Variables" button
+   - Under "System Variables", find and select "Path"
+   - Click "Edit" → "New"
+   - Add your FileTracker directory (e.g., `C:\Program Files\FileTracker`)
+   - Click "OK" on all windows
+   - Restart your terminal/command prompt
+
+#### Linux/macOS
+1. Copy the FileTracker executable to `/usr/local/bin/`:
+```bash
+sudo cp FileTracker /usr/local/bin/
+sudo chmod +x /usr/local/bin/FileTracker
+```
+
+### Using from Command Line
+After adding to PATH, you can use FileTracker from any directory:
+```bash
+# Start monitoring current directory
+FileTracker start .
+
+# Monitor specific directory
+FileTracker start "path/to/directory"
+
+# Get status
+FileTracker status
+
+# View logs
+FileTracker log
+```
 
 ---
 
