@@ -86,15 +86,29 @@ exit	             Exit program
 ---
 ## Contributing
 
-We welcome contributions! Please follow these steps:
-Fork the repository
-Create a new branch (git checkout -b feature-name)
-Make your changes
-Commit your changes (git commit -m "Add feature")
-Push to your branch (git push origin feature-name)
-Create a Pull Request
+We love your input! We want to make contributing to FileTracker as easy and transparent as possible, whether it's:
 
-Please make sure your code follows existing style and is tested.
+- Reporting a bug 🐛
+- Discussing the current state of the code 💬
+- Submitting a fix 🔧
+- Proposing new features ✨
+- Becoming a maintainer 🌟
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed contribution guidelines.
+
+### Bug Reports 🐛
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](../../issues/new); it's that easy!
+
+### Feature Requests 💡
+Have a great idea for FileTracker? We'd love to hear it! Open an issue with the tag "enhancement".
+
+### Good First Issues 🌱
+Looking to contribute? Check out our [good first issues](../../issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) for beginner-friendly tasks. Here are some examples:
+- Add file size monitoring
+- Implement file type filtering
+- Add basic test cases
+- Improve error messages
+- Add configuration file support
 
 ---
 

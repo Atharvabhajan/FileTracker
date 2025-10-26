@@ -1,0 +1,27 @@
+name: C++ CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y g++ cmake make
+        
+    - name: Build
+      run: |
+        g++ -std=c++17 -pthread -o FileTracker src/*.cpp
+        
+    # Add testing steps here when tests are implemented
+    # - name: Run tests
+    #   run: ./run_tests
