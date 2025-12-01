@@ -2,6 +2,7 @@
 #include "Logger.h"
 #include "ChangeDetector.h"
 #include "DirectorySnapshot.h"
+#include "Globals.h"
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -26,6 +27,7 @@ void FileWatcher::start() {
         std::cout << Logger::formatEvent(msg) << std::endl;
         Logger::logEvent(msg);
     }
+
 
     // Start watcher thread
     watcherThread = std::thread(&FileWatcher::watchLoop, this);
@@ -55,7 +57,12 @@ void FileWatcher::watchLoop() {
         // Log and print changes
         for (const auto& [status, path] : changes) {
             std::string msg = status + " " + path;
+
+           if (showlivelogs) {
+            std::lock_guard<std::mutex> lock(coutMutex);
             std::cout << Logger::formatEvent(msg) << std::endl;
+           }
+            
             Logger::logEvent(msg);
         }
 

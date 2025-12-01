@@ -1,5 +1,6 @@
 #include "CommandProcessor.h"
 #include "Logger.h"
+#include "Globals.h"
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -14,6 +15,7 @@ CommandProcessor::CommandProcessor() : isRunning(true) {}
 
 CommandProcessor::~CommandProcessor() {
     if (watcher) {
+        std::cout<<"destroyed in the destructor!";
         watcher->stop();
     }
 }
@@ -70,7 +72,22 @@ void CommandProcessor::processCommand(const std::string& command) {
         showHelp();
     } else if (cmd == "exit" || cmd == "quit") {
         isRunning = false;
-    } else {
+    } else if (cmd == "prompt" && !args.empty() && args[0] == "logs") {
+        showlivelogs = true;
+        std::cout << "Starting log prompt. Type 'exit' or 'stop' to stop logging.\n";
+        std::string line;
+        while (true) {
+            std::cout << "log> ";
+            std::getline(std::cin, line);
+            if (line == "stop" || line == "exit") {
+                showlivelogs = false;
+                std::cout << "Exiting log prompt.\n";
+                break;
+            } 
+            handleLog({line});
+        }
+    }
+    else {
         std::cout << "Unknown command. Type 'help' for usage.\n";
     }
 }
@@ -121,7 +138,7 @@ void CommandProcessor::handleStatus() {
     std::cout << "Watching directory: " << currentDirectory << "\n";
     std::cout << "Active: " << (watcher && watcher->isActive() ? "Yes" : "No") << "\n\n";
     
-    // Get current snapshot stats
+    // to get current snapshot stats
     DirectorySnapshot snapshot(currentDirectory);
     const auto& files = snapshot.getFiles();
     
@@ -222,6 +239,7 @@ void CommandProcessor::showHelp() {
     std::cout << "  start <dir>    Start watching directory <dir>\n";
     std::cout << "  status         Show current watching status and recent changes\n";
     std::cout << "  log [filter]   Display log (optionally filtered by type)\n";
+    std::cout << "  prompt logs    start prompting the logs \n";
     std::cout << "  duplicates     Find duplicate files in watched directory\n";
     std::cout << "  stop           Stop watching current directory\n";
     std::cout << "  help           Show this help message\n";
