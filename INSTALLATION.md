@@ -123,6 +123,5 @@ FileTracker log
 ### Getting Help
 
 If you encounter any issues:
-1. Check the [FAQ](./FAQ.md)
-2. Open an issue on GitHub
-3. Contact the maintainers
+1. Open an issue on GitHub
+2. Contact the maintainers

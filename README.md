@@ -119,6 +119,7 @@ Command	           Description
 start <dir>	       Start watching the given directory
 status	           Show active status and recent changes
 log [filter]	     View logs (optionally filter by ADDED / MODIFIED / DELETED)
+prompt logs         start logging on window
 duplicates	       Find duplicate files by hash
 stop	             Stop watching
 help	             Show help message
