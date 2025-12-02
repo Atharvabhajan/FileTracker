@@ -46,7 +46,6 @@ void ChangeDetector::detectChanges() {
     std::unordered_map<std::string, FileInfo> oldMap;
     for (const auto& file : oldSnapshot.getFiles())
         oldMap[file.getfullpath()] = file;
-
     for (const auto& file : newSnapshot.getFiles()) {
         auto it = oldMap.find(file.getfullpath());
         if (it == oldMap.end()) {
@@ -57,14 +56,12 @@ void ChangeDetector::detectChanges() {
             bool needsHashCheck = isTextFile || 
                                 file.getfilesize() != it->second.getfilesize() ||
                                 file.getlastmodifiedtime() != it->second.getlastmodifiedtime();
-            
             if (needsHashCheck && file.getfilehash() != it->second.getfilehash()) {
                 changes.emplace_back("[MODIFIED]", file.getfullpath());
             }
             oldMap.erase(it);
         }
     }
-
     for (const auto& [path, _] : oldMap) {
         changes.emplace_back("[DELETED]", path);
     }

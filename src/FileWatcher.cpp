@@ -7,17 +7,15 @@
 #include <thread>
 #include <chrono>
 
-FileWatcher::FileWatcher(const std::string& dir, int interval)
-    : directoryPath(dir), intervalSeconds(interval < 1 ? 1 : interval), running(false), oldSnap(dir) {}
-
 FileWatcher::~FileWatcher() {
     stop();
 }
 
+FileWatcher::FileWatcher(const std::string& dir, int interval)
+    : directoryPath(dir), intervalSeconds(interval < 1 ? 1 : interval), running(false), oldSnap(dir) {}
 void FileWatcher::start() {
     if (running) return;
     running = true;
-
     // Make sure logs folder exists
     Logger::ensureLogFolder();
 
@@ -27,8 +25,6 @@ void FileWatcher::start() {
         std::cout << Logger::formatEvent(msg) << std::endl;
         Logger::logEvent(msg);
     }
-
-
     // Start watcher thread
     watcherThread = std::thread(&FileWatcher::watchLoop, this);
     std::cout << Logger::formatEvent("Started watching directory: " + directoryPath) << std::endl;
@@ -70,3 +66,6 @@ void FileWatcher::watchLoop() {
         oldSnap = newSnap;
     }
 }
+
+
+
